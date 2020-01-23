@@ -49,6 +49,8 @@
             </b-row>
 
             <b-row class="mb-2" v-if="infrastructure.provider.api_type == 'kubernetes'">
+
+              <!-- THIS IS THE OLD TEXTAREA THAT WAS USED TO INPUT A CREDENTIALS FILE
               <span class="mt-1" style="display:inline-block; margin-left:10px;" >
                 Credentials file:
               </span>
@@ -60,23 +62,20 @@
                       max-rows="5"
                     ></b-form-textarea>
               </span>
-
-              <!-- THIS IS THE OLD FILE FORM THAT IS NOT USED ANYMORE
-              <span style="display:inline-block; margin-left:10px;  width:400px; " >
-                <b-form-file
-                  v-model="infrastructure.provider.credentials.config"
-                  :state="Boolean(infrastructure.provider.credentials.config)"
-                  placeholder="Choose a file or drop it here..." >
-                </b-form-file>
-              </span>
               -->
 
-              <div style=" margin-left:20px; ">
-                  <b-input-group prepend="Secret:">
-                  <b-form-input type="text" v-model="infrastructure.provider.credentials.registries_secret"
-                  placeholder="Name of the secret" ></b-form-input>
+              <b-col>
+                  <b-input-group prepend="Secret id:">
+                  <b-form-input type="text" v-model="infrastructure.provider.secret_id"
+                  placeholder="Id of the secret" ></b-form-input>
                   </b-input-group>
-              </div>
+              </b-col>
+              <b-col>
+                  <b-input-group prepend="Registries secret:">
+                  <b-form-input type="text" v-model="infrastructure.provider.credentials.registries_secret"
+                  placeholder="Name of the registries secret" ></b-form-input>
+                  </b-input-group>
+              </b-col>
             </b-row>
 
             <b-row class="mb-2" v-if="infrastructure.provider.api_type == 'cloudsigma'">
@@ -330,7 +329,7 @@ export default {
         machine.drives.splice(index, 1);
          },
      addInfrastructure: function() {
-        this.globalObjectSection3.infrastructures.push( {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'' }, provider: {api_type:'cloudsigma', credentials: { username:'', password:'', config: '', registries_secret:''}}, resources: [] } )
+        this.globalObjectSection3.infrastructures.push( {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'' }, provider: {secret_id:'', api_type:'cloudsigma', credentials: { username:'', password:'', config: '', registries_secret:''}}, resources: [] } )
          },
      removeInfrastructure: function(infrastructure) {
         var index = this.globalObjectSection3.infrastructures.indexOf(infrastructure);

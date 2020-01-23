@@ -680,12 +680,18 @@ export default {
             numFound++;
           }
         }
-
         //If there is more than one infrastructure that has been selected as default, then show a warning popup.
         if (numFound!=1){
             this.showPopup = true;
         }
         else{
+
+
+          // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
+          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].original_ip.cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
+          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].original_ip.cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+
+
           console.log("Performing post call to Deployment engine.");
 
           // THIS IS THE CALL TO THE DEPLOYMENT ENGINE ( IT IS PASSING blueprintObject, THE ONE RECEIVED FROM THE RE)
@@ -720,7 +726,7 @@ export default {
       generateJSON: function() {
           //finalJSON is a different object!!! It's not a simple reference to "this.$root.$data.globalObject".
           this.finalJSON = JSON.parse(JSON.stringify( this.$root.$data.globalObject )); //This trick is used to clone the global object and create a new independent object (it's NOT passed by reference).
-          this.copyCredentialsFile();
+          //this.copyCredentialsFile(); --> Not necessary anymore, because we're not using credential files anymore.
           this.getApplicationType();
           this.populateSingleMethodTagArray();
           this.eliminateDuplicatesOfMethodTagArray();
