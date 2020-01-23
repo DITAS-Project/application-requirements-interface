@@ -24,7 +24,7 @@ and then go back to this one. Now the value should be refreshed. -->
           <b-button class="mt-1 mb-2" variant="success" v-on:click="requestDeployment(item)">Deploy</b-button>
 
           <!-- THIS BUTTON WAS ONLY ADDED FOR DEBUGGING PURPOSES -->
-          <b-button class="mt-1 mb-2" variant="success" v-on:click="downloadConcreteBp(item)">Download concrete blueprint</b-button>
+          <b-button class="mt-1 mb-2" variant="success" v-on:click="downloadIntermediateBp(item)">Download intermediate blueprint</b-button>
 
           <b-list-group v-for="infrastructure in item.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures">
             <b-list-group-item variant="info" button>
@@ -675,12 +675,12 @@ export default {
   methods: {
 
 
-      downloadConcreteBp: function(selectedBlueprint){
+      downloadIntermediateBp: function(selectedBlueprint){
         //This function is only used for debugging purposes.
 
         // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
-        selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].original_ip.cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
-        selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].original_ip.cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+        selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
+        selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
 
         download(JSON.stringify(selectedBlueprint.blueprint), "concrete-bp.json", "application/json");
       },
@@ -702,8 +702,8 @@ export default {
 
 
           // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
-          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].original_ip.cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
-          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].original_ip.cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
+          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
 
 
           console.log("Performing post call to Deployment engine.");
