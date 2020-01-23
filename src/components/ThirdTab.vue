@@ -104,6 +104,15 @@
             </b-form-radio-group>
             </b-row>
 
+            <b-row>
+              <b-col cols="6">
+                <b-input-group prepend="Port range:">
+                <b-form-input type="text"
+                placeholder="Write a port range in this format: xxxxx-yyyyy"
+                v-model="infrastructure.extra_properties.available_ports_range"></b-form-input>
+                </b-input-group>
+              </b-col>
+            </b-row>
 
 
             <b-row v-if="infrastructure.provider.api_type == 'cloudsigma'"
@@ -329,7 +338,7 @@ export default {
         machine.drives.splice(index, 1);
          },
      addInfrastructure: function() {
-        this.globalObjectSection3.infrastructures.push( {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'' }, provider: {secret_id:'', api_type:'cloudsigma', credentials: { username:'', password:'', config: '', registries_secret:''}}, resources: [] } )
+        this.globalObjectSection3.infrastructures.push( {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'', available_ports_range:'' }, provider: {secret_id:'', api_type:'cloudsigma', credentials: { username:'', password:'', config: '', registries_secret:''}}, resources: [] } )
          },
      removeInfrastructure: function(infrastructure) {
         var index = this.globalObjectSection3.infrastructures.indexOf(infrastructure);
