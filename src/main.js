@@ -35,7 +35,7 @@ new Vue({
 
                     //Section3
                     providedResources:  { infrastructures: [ {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'', available_ports_range:'' },
-                                                              provider: { api_endpoint:'', credentials: { username:'', password:'', config: '', registries_secret:''}, api_type:'cloudsigma' },
+                                                              provider: { api_endpoint:'', credentials: { username:' ', password:' ', registries_secret:''}, api_type:'cloudsigma' },
                                                               resources: [] } ]
                                         },
 

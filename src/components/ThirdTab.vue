@@ -338,7 +338,7 @@ export default {
         machine.drives.splice(index, 1);
          },
      addInfrastructure: function() {
-        this.globalObjectSection3.infrastructures.push( {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'', available_ports_range:'' }, provider: {secret_id:'', api_type:'cloudsigma', credentials: { username:'', password:'', registries_secret:''}}, resources: [] } )
+        this.globalObjectSection3.infrastructures.push( {  name:'', type:'', extra_properties: { owner:'ApplicationDeveloper', ditas_default:'', available_ports_range:'' }, provider: {secret_id:'', api_type:'cloudsigma', credentials: { username:' ', password:' ', registries_secret:''}}, resources: [] } )
          },
      removeInfrastructure: function(infrastructure) {
         var index = this.globalObjectSection3.infrastructures.indexOf(infrastructure);
