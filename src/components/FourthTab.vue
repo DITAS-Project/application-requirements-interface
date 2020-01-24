@@ -682,6 +682,18 @@ export default {
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
 
+        let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
+        for(k=0; k < infrastructure.length; k++){
+          if(infrastructures[k].provider.api_type=="kubernetes"){
+              if(infrastructures[k].provider.credentials.password){
+                delete infrastructures[k].provider.credentials.password;
+              }
+              if(infrastructures[k].provider.credentials.username){
+                delete infrastructures[k].provider.credentials.username;
+              }
+          }
+        }
+
         download(JSON.stringify(selectedBlueprint.blueprint), "concrete-bp.json", "application/json");
       },
 
@@ -704,6 +716,18 @@ export default {
           // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
           selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
           selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+
+          let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
+          for(k=0; k < infrastructure.length; k++){
+            if(infrastructures[k].provider.api_type=="kubernetes"){
+                if(infrastructures[k].provider.credentials.password){
+                  delete infrastructures[k].provider.credentials.password;
+                }
+                if(infrastructures[k].provider.credentials.username){
+                  delete infrastructures[k].provider.credentials.username;
+                }
+            }
+          }
 
 
           console.log("Performing post call to Deployment engine.");
