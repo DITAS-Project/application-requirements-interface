@@ -683,7 +683,7 @@ export default {
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
 
         let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
-        for(k=0; k < infrastructure.length; k++){
+        for(var k=0; k < infrastructure.length; k++){
           if(infrastructures[k].provider.api_type=="kubernetes"){
               if(infrastructures[k].provider.credentials.password){
                 delete infrastructures[k].provider.credentials.password;
@@ -718,7 +718,7 @@ export default {
           selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
 
           let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
-          for(k=0; k < infrastructure.length; k++){
+          for(var k=0; k < infrastructure.length; k++){
             if(infrastructures[k].provider.api_type=="kubernetes"){
                 if(infrastructures[k].provider.credentials.password){
                   delete infrastructures[k].provider.credentials.password;
