@@ -10,7 +10,9 @@ and then go back to this one. Now the value should be refreshed. -->
     <pre> {{ receivedBlueprints }} </pre>
     -->
 
+    <!--
     <pre> {{ DEresponse }} </pre>
+    -->
 
     <div v-for="item in this.receivedBlueprints">
       <b-container>
@@ -22,7 +24,7 @@ and then go back to this one. Now the value should be refreshed. -->
           <div v-for="method in item.methodNames"> <font color="black"> Method name:</font> {{ method }} </div>
 
           <b-button class="mt-1 mb-2" variant="success" v-on:click="requestDeployment(item)">Deploy</b-button>
-
+          &nbsp;
           <!-- THIS BUTTON WAS ONLY ADDED FOR DEBUGGING PURPOSES -->
           <b-button class="mt-1 mb-2" variant="success" v-on:click="downloadIntermediateBp(item)">Download intermediate blueprint</b-button>
 
@@ -51,8 +53,19 @@ and then go back to this one. Now the value should be refreshed. -->
     <!--This is the popup that is shown if the user tried to request a deployment
     where multiple infrastructures were selected as default (which is not allowed).
     The boolean in "v-model" is used to decide when the popup should be displayed. -->
-    <b-modal v-model="showPopup" title="Error!" cancel-disabled>
+    <b-modal v-model="showErrorPopup" title="Error!" cancel-disabled>
          Make sure you select one and only one infrastructure as default. Then try to deploy again.
+    </b-modal>
+
+    <!--This is the popup that is shown when the user starts a deployment.-->
+    <b-modal v-model="showDeploymentPopup" title="Deployment info" cancel-disabled>
+      <!--If no response has been received from the DE yet, a spinner is displayed.-->
+      <b-button v-if="DEresponse==null" variant="success" disabled >
+        <b-spinner small label="Spinning" ></b-spinner>
+        Starting deployment...
+      </b-button>
+      <!--Else, the response from the DE is displayed.-->
+      <pre v-else> {{ DEresponse }} </pre>
     </b-modal>
 
 
@@ -78,7 +91,8 @@ export default {
 
   data() {
     return {
-      showPopup: false,
+      showErrorPopup: false,
+      showDeploymentPopup: false,
       receivedBlueprints: null,
       DEresponse: null,
       finalJSON: {},
@@ -711,7 +725,7 @@ export default {
         }
         //If there is more than one infrastructure that has been selected as default, then show a warning popup.
         if (numFound!=1){
-            this.showPopup = true;
+            this.showErrorPopup = true;
         }
         else{
 
@@ -735,6 +749,7 @@ export default {
             }
           }
 
+          this.displayDeploymentPopup();
 
           console.log("Performing post call to Deployment engine.");
 
@@ -744,7 +759,7 @@ export default {
                .post('http://153.92.30.56:50012/blueprint',
                 blueprintObject,
                 {headers: {'Content-Type': 'application/json'}})
-               .then(response => (this.DEresponse = response.body))
+               .then(response => (this.DEresponse = response))
                .catch(function (error) {
                       console.log(error);
                     });
@@ -764,6 +779,11 @@ export default {
                     console.log(error);
                   });
 
+
+      },
+
+      displayDeploymentPopup: function(){
+        this.showDeploymentPopup = true;
 
       },
 
