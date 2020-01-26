@@ -688,10 +688,10 @@ export default {
         let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
         for(var k=0; k < infrastructures.length; k++){
           if(infrastructures[k].provider.api_type=="kubernetes"){
-              if(infrastructures[k].provider.credentials.password){
+              if( infrastructures[k].provider.credentials.hasOwnProperty('password') ){
                 delete infrastructures[k].provider.credentials.password;
               }
-              if(infrastructures[k].provider.credentials.username){
+              if( infrastructures[k].provider.credentials.hasOwnProperty('username') ){
                 delete infrastructures[k].provider.credentials.username;
               }
           }
@@ -726,10 +726,10 @@ export default {
           let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
           for(var k=0; k < infrastructures.length; k++){
             if(infrastructures[k].provider.api_type=="kubernetes"){
-                if(infrastructures[k].provider.credentials.password){
+                if( infrastructures[k].provider.credentials.hasOwnProperty('password') ){
                   delete infrastructures[k].provider.credentials.password;
                 }
-                if(infrastructures[k].provider.credentials.username){
+                if( infrastructures[k].provider.credentials.hasOwnProperty('username') ){
                   delete infrastructures[k].provider.credentials.username;
                 }
             }
