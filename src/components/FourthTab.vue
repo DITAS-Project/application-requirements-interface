@@ -678,10 +678,13 @@ export default {
       downloadIntermediateBp: function(selectedBlueprint){
         //This function is only used for debugging purposes.
 
-        // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
+        // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure", only for "batch" applications.
+        if(this.finalJSON.applicationType=="batch") {
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+      }
 
+        //As requested, I'm explicitely deleting attributes "password" and "username" in case of "kubernetes" infrastructures (otherwise, they'd cause problems).
         let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
         for(var k=0; k < infrastructures.length; k++){
           if(infrastructures[k].provider.api_type=="kubernetes"){
@@ -713,10 +716,13 @@ export default {
         else{
 
 
-          // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
-          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
-          selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+          // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure", only for "batch" applications.
+          if(this.finalJSON.applicationType=="batch") {
+            selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
+            selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+          }
 
+          //As requested, I'm explicitely deleting attributes "password" and "username" in case of "kubernetes" infrastructures (otherwise, they'd cause problems).
           let infrastructures = selectedBlueprint.blueprint.COOKBOOK_APPENDIX.Resources.infrastructures;
           for(var k=0; k < infrastructures.length; k++){
             if(infrastructures[k].provider.api_type=="kubernetes"){
