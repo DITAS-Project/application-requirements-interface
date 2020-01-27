@@ -58,14 +58,17 @@ and then go back to this one. Now the value should be refreshed. -->
     </b-modal>
 
     <!--This is the popup that is shown when the user starts a deployment.-->
-    <b-modal v-model="showDeploymentPopup" title="Deployment info" cancel-disabled>
+    <b-modal v-model="showDeploymentPopup" title="Deployment info" hide-footer no-close-on-esc no-close-on-backdrop >
       <!--If no response has been received from the DE yet, a spinner is displayed.-->
       <b-button v-if="DEresponse==null" variant="success" disabled >
         <b-spinner small label="Spinning" ></b-spinner>
         Starting deployment...
       </b-button>
       <!--Else, the response from the DE is displayed.-->
-      <pre v-else> {{ DEresponse }} </pre>
+      <div>
+        <b-button block variant="success" v-on:click="clearDeploymentPopup()" > Finish deployment. </b-button>
+        <pre v-else> {{ DEresponse }} </pre>
+      </div>
     </b-modal>
 
 
@@ -688,6 +691,10 @@ export default {
 
   methods: {
 
+      clearDeploymentPopup: function(){
+        this.DEresponse=null;
+        this.showDeploymentPopup=false;
+      },
 
       downloadIntermediateBp: function(selectedBlueprint){
         //This function is only used for debugging purposes.
