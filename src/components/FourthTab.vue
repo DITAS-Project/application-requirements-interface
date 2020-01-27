@@ -65,9 +65,9 @@ and then go back to this one. Now the value should be refreshed. -->
         Starting deployment...
       </b-button>
       <!--Else, the response from the DE is displayed.-->
-      <div>
+      <div v-else>
         <b-button block variant="success" v-on:click="clearDeploymentPopup()" > Finish deployment. </b-button>
-        <pre v-else> {{ DEresponse }} </pre>
+        <pre> {{ DEresponse }} </pre>
       </div>
     </b-modal>
 
