@@ -699,10 +699,16 @@ export default {
       downloadIntermediateBp: function(selectedBlueprint){
         //This function is only used for debugging purposes.
 
-        // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure", only for "batch" applications.
-        if(this.finalJSON.applicationType=="batch") {
+      // As requested, for batch applications, in "influxdb-dal-local", I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
+      if(this.finalJSON.applicationType=="batch") {
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
         selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+      }
+
+      // As requested, for streaming applications, in "streaming-dal", I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
+      else if(this.finalJSON.applicationType=="streaming") {
+        selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["streaming-dal"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
+        selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["streaming-dal"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
       }
 
         //As requested, I'm explicitely deleting attributes "password" and "username" in case of "kubernetes" infrastructures (otherwise, they'd cause problems).
@@ -737,10 +743,16 @@ export default {
         else{
 
 
-          // As requested, I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure", only for "batch" applications.
+          // As requested, for batch applications, in "influxdb-dal-local", I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
           if(this.finalJSON.applicationType=="batch") {
             selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
             selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["influxdb-dal-local"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
+          }
+
+          // As requested, for streaming applications, in "streaming-dal", I'm hardcoding "spart-edge-infrastructure" and "spart-fog-infrastructure".
+          else if(this.finalJSON.applicationType=="streaming") {
+            selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["streaming-dal"].cluster_original_ips["spart-edge-infrastructure"] = "192.168.30.32";
+            selectedBlueprint.blueprint.INTERNAL_STRUCTURE.DAL_Images["streaming-dal"].cluster_original_ips["spart-fog-infrastructure"] = "192.168.30.32";
           }
 
           //As requested, I'm explicitely deleting attributes "password" and "username" in case of "kubernetes" infrastructures (otherwise, they'd cause problems).
